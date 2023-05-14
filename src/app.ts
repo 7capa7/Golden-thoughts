@@ -18,7 +18,6 @@ AppDataSource.initialize()
     log.error(`Could not connect with database: ${err}`);
   });
 
-
 app.use(bodyParser.json());
 app.use(authRouter);
 
