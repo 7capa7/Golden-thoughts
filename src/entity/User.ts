@@ -40,7 +40,7 @@ export class User extends BaseEntity {
   name: string;
 
   async verifyPassword(givenPassword: string): Promise<boolean> {
-    return bcrypt.compare(this.password, givenPassword);
+    return await bcrypt.compare(givenPassword, this.password);
   }
 
   @BeforeInsert()
