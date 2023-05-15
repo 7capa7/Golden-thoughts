@@ -9,6 +9,7 @@ export const AppDataSource = new DataSource({
   username: config.get("db_username"),
   password: config.get("db_password"),
   database: config.get("db_name"),
+  dropSchema: true,
   synchronize: true,
   entities: [User],
 });
