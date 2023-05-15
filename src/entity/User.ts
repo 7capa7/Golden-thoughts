@@ -7,11 +7,19 @@ import {
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
+import Role from "../utils/Role";
 
 @Entity()
 export class User extends BaseEntity {
   @PrimaryColumn()
   id: string = uuidv4();
+
+  @Column({
+    type: "enum",
+    enum: Role,
+    default: Role.USER,
+  })
+  role: Role;
 
   @Column({
     unique: true,
