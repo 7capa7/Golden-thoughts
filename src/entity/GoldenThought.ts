@@ -20,6 +20,5 @@ export class GoldenThought extends BaseEntity {
   value: string;
 
   @ManyToOne(() => User, { nullable: true })
-  @JoinColumn()
   user: User;
 }

@@ -1,8 +1,11 @@
 import { Router } from "express";
 import validateResource from "../middleware/validateResource";
-import { GoldenThoughtSchema } from "../schema/GoldenThought.schema";
+import { GoldenThoughtSchema } from "../schema/goldenThought.schema";
 import deserializeUser from "../middleware/deserializeUser";
-import { createGoldenThoughtHandler } from "../controller/goldenThought.controller";
+import {
+  createGoldenThoughtHandler,
+  getGoldenThoughtsHandler,
+} from "../controller/goldenThought.controller";
 
 const router = Router();
 
@@ -11,6 +14,11 @@ router.post(
   deserializeUser,
   validateResource(GoldenThoughtSchema),
   createGoldenThoughtHandler
+);
+router.get(
+  "/api/auth/golden-thoughts",
+  deserializeUser,
+  getGoldenThoughtsHandler
 );
 
 const goldeThoughtRouter = router;
