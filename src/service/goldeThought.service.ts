@@ -1,10 +1,20 @@
 import { GoldenThought } from "../entity/GoldenThought";
 
-export async function createGoldenThought(data: Partial<GoldenThought>) {
+export async function createGoldenThought(
+  data: Partial<GoldenThought>
+): Promise<GoldenThought> {
   const goldenThought = GoldenThought.create({
     value: data.value,
     user: data.user,
   });
 
   return await goldenThought.save();
+}
+
+export async function getAllGoldenThoughts(): Promise<GoldenThought[]> {
+  const repository = GoldenThought.getRepository();
+  return await repository
+    .createQueryBuilder("goldenThought")
+    .leftJoinAndSelect("goldenThought.user", "user")
+    .getMany();
 }

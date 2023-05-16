@@ -1,11 +1,13 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import {
   GoldeThoughtDto,
   GoldenThoughtInput,
-} from "../schema/GoldenThought.schema";
-import { createGoldenThought } from "../service/goldeThought.service";
+} from "../schema/goldenThought.schema";
+import {
+  createGoldenThought,
+  getAllGoldenThoughts,
+} from "../service/goldeThought.service";
 import { GoldenThought } from "../entity/GoldenThought";
-import { log } from "../utils/logger";
 
 export async function createGoldenThoughtHandler(
   req: Request<{}, {}, GoldenThoughtInput>,
@@ -23,7 +25,20 @@ export async function createGoldenThoughtHandler(
       .json(mapGoldenThoughtToGoldenThoughtDto(GoldenThought))
       .send();
   } catch (e) {
-    log.info(e);
+    return res.status(500).send("Server error");
+  }
+}
+
+export async function getGoldenThoughtsHandler(req: Request, res: Response) {
+  try {
+    const goldenThoughts = await getAllGoldenThoughts();
+
+    const goldenThoughtsDto: GoldeThoughtDto[] = goldenThoughts.map((e) =>
+      mapGoldenThoughtToGoldenThoughtDto(e)
+    );
+
+    return res.status(200).json(goldenThoughtsDto).send();
+  } catch (e) {
     return res.status(500).send("Server error");
   }
 }
