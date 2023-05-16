@@ -18,7 +18,7 @@ const createTestUsers = async () => {
     await createUser(user);
     const savedAdmin = await createUser(admin);
     savedAdmin.role = Role.ADMIN;
-    savedAdmin.save();
+    await savedAdmin.save();
 
     log.info(
       "Test users have been created : {user@gmail.com | password}, {admin@gmail.com | password}"

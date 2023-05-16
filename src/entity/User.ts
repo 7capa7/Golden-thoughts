@@ -4,10 +4,12 @@ import {
   Column,
   PrimaryColumn,
   BeforeInsert,
+  OneToMany,
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 import Role from "../utils/Role";
+import { GoldenThought } from "./GoldenThought";
 
 @Entity()
 export class User extends BaseEntity {
@@ -55,4 +57,5 @@ export class User extends BaseEntity {
   async encryptPassword() {
     this.password = await bcrypt.hash(this.password, 10);
   }
+  
 }

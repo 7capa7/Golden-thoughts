@@ -7,6 +7,7 @@ import { AppDataSource } from "./db-config";
 import authRouter from "./router/auth.router";
 import bodyParser from "body-parser";
 import createTestUsers from "./utils/createTestUsers";
+import goldeThoughtRouter from "./router/goldenThought.router";
 
 const app = express();
 const port = config.get("port");
@@ -20,6 +21,7 @@ AppDataSource.initialize()
   });
 
 app.use(bodyParser.json());
+app.use(goldeThoughtRouter);
 app.use(authRouter);
 
 app.listen(port, async () => {
