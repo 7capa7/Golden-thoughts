@@ -27,3 +27,8 @@ export async function getGoldenThoughtById(id: string) {
     .where("goldenThought.id = :id", { id })
     .getOne();
 }
+
+export async function deleteGoldenThoughtById(id: string) {
+  const repository = GoldenThought.getRepository();
+  return await repository.delete({ id });
+}
