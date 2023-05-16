@@ -24,7 +24,10 @@ export async function registerHandler(
           code: 409,
         })
         .send();
-    else return res.status(500).send("Server error");
+    else return res.status(500).json({
+      message: "Server error",
+      code: 500,
+    }).send();
   }
 }
 

@@ -18,3 +18,12 @@ export async function getAllGoldenThoughts(): Promise<GoldenThought[]> {
     .leftJoinAndSelect("goldenThought.user", "user")
     .getMany();
 }
+
+export async function getGoldenThoughtById(id: string) {
+  const repository = GoldenThought.getRepository();
+  return await repository
+    .createQueryBuilder("goldenThought")
+    .leftJoinAndSelect("goldenThought.user", "user")
+    .where("goldenThought.id = :id", { id })
+    .getOne();
+}

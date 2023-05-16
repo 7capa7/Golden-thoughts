@@ -4,6 +4,7 @@ import { GoldenThoughtSchema } from "../schema/goldenThought.schema";
 import deserializeUser from "../middleware/deserializeUser";
 import {
   createGoldenThoughtHandler,
+  getGoldenThoughtByIdHandler,
   getGoldenThoughtsHandler,
 } from "../controller/goldenThought.controller";
 
@@ -21,5 +22,10 @@ router.get(
   getGoldenThoughtsHandler
 );
 
+router.get(
+  "/api/auth/golden-thought",
+  deserializeUser,
+  getGoldenThoughtByIdHandler
+);
 const goldeThoughtRouter = router;
 export default goldeThoughtRouter;
