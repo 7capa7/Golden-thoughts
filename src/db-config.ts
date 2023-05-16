@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import config from "config";
 import { User } from "./entity/User";
+import { GoldenThought } from "./entity/GoldenThought";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,5 +12,5 @@ export const AppDataSource = new DataSource({
   database: config.get("db_name"),
   dropSchema: true,
   synchronize: true,
-  entities: [User],
+  entities: [User, GoldenThought],
 });
