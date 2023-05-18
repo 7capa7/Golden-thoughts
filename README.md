@@ -2,7 +2,7 @@
 * Application through which we can collect golden thoughts from employees in our company. App allows users to create golden ideas anonymously or by revealing their name. User can search for all golden thoughts or only those that have not been executed yet. Admins can change the status of golden thoughts to 'done' and they can also delete them.
 
 ## Requirements
-* Nodejs, npm, Docker
+* Nodejs, Npm, Docker
 
 ## Quick Start
 * To download docker image for postgres: docker pull postgres
@@ -12,5 +12,12 @@
 * To run application: npm run dev
 * Application by default starts on localhost : 3000
 * At the start of the app will be created test users: "user@gmail.pl", "admin@gmail.pl" with password "password"
+
+## Main Technologies
+* TypeScript
+* Express
+* TypeORM
+* Postgres
+* Jsonwebtoken
 
 ![postman](postman.png)
