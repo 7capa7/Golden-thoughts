@@ -1,11 +1,4 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryColumn,
-} from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { User } from "./User";
 
@@ -21,4 +14,7 @@ export class GoldenThought extends BaseEntity {
 
   @ManyToOne(() => User, { nullable: true })
   user: User;
+
+  @Column({ default: false })
+  isDone: boolean;
 }

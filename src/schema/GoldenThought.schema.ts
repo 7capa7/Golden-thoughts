@@ -15,4 +15,5 @@ export type GoldeThoughtDto = {
   readonly id: string;
   readonly value: string;
   readonly user: string;
+  readonly isDone: boolean;
 };

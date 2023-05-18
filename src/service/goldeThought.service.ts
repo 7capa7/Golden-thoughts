@@ -32,3 +32,7 @@ export async function deleteGoldenThoughtById(id: string) {
   const repository = GoldenThought.getRepository();
   return await repository.delete({ id });
 }
+
+export async function updateGoldenThought(goldenThought: GoldenThought) {
+  return await goldenThought.save();
+}

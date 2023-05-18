@@ -6,6 +6,7 @@ import {
   createGoldenThoughtHandler,
   getGoldenThoughtByIdHandler,
   getGoldenThoughtsHandler,
+  setGoldenThoughtDone,
 } from "../controller/goldenThought.controller";
 import checkIfAdmin from "../middleware/checkIfAdmin";
 import { deleteGoldenThoughtHandler } from "../controller/goldenThought.controller";
@@ -35,6 +36,13 @@ router.delete(
   deserializeUser,
   checkIfAdmin,
   deleteGoldenThoughtHandler
+);
+
+router.patch(
+  "/api/auth/admin/done",
+  deserializeUser,
+  checkIfAdmin,
+  setGoldenThoughtDone
 );
 const goldeThoughtRouter = router;
 export default goldeThoughtRouter;
