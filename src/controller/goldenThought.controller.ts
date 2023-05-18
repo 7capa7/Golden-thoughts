@@ -8,6 +8,7 @@ import {
   deleteGoldenThoughtById,
   getAllGoldenThoughts,
   getGoldenThoughtById,
+  getUnDoneGoldenThoughts,
   updateGoldenThought,
 } from "../service/goldeThought.service";
 import { GoldenThought } from "../entity/GoldenThought";
@@ -18,7 +19,7 @@ export async function createGoldenThoughtHandler(
 ) {
   const body = req.body;
 
-  if (req.query.anonymous == "true") req.body.user = null;
+  if (req.query.anonymous === "true") req.body.user = null;
   else req.body.user = res.locals.user;
 
   try {
@@ -40,7 +41,12 @@ export async function createGoldenThoughtHandler(
 
 export async function getGoldenThoughtsHandler(req: Request, res: Response) {
   try {
-    const goldenThoughts = await getAllGoldenThoughts();
+    const unDoneOnly = req.query.unDoneOnly;
+
+    var goldenThoughts;
+    if (unDoneOnly === null || unDoneOnly === "false") {
+      goldenThoughts = await getAllGoldenThoughts();
+    } else goldenThoughts = await getUnDoneGoldenThoughts();
 
     const goldenThoughtsDto: GoldeThoughtDto[] = goldenThoughts.map((e) =>
       mapGoldenThoughtToGoldenThoughtDto(e)
