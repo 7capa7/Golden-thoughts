@@ -8,6 +8,7 @@ import {
   deleteGoldenThoughtById,
   getAllGoldenThoughts,
   getGoldenThoughtById,
+  updateGoldenThought,
 } from "../service/goldeThought.service";
 import { GoldenThought } from "../entity/GoldenThought";
 
@@ -61,7 +62,7 @@ export async function getGoldenThoughtByIdHandler(req: Request, res: Response) {
   try {
     const id = req.query.id;
 
-    if (id == undefined) {
+    if (id === undefined) {
       return res
         .status(400)
         .json({
@@ -74,10 +75,13 @@ export async function getGoldenThoughtByIdHandler(req: Request, res: Response) {
     const goldenThought = await getGoldenThoughtById(id.toString());
 
     if (goldenThought === null) {
-      return res.status(200).json({
-        message:`No golden thought with id: ${id.toString()}`,
-        code: 200
-      }).send();
+      return res
+        .status(200)
+        .json({
+          message: `No golden thought with id: ${id.toString()}`,
+          code: 200,
+        })
+        .send();
     }
 
     return res
@@ -99,7 +103,7 @@ export async function deleteGoldenThoughtHandler(req: Request, res: Response) {
   try {
     const id = req.query.id;
 
-    if (id == undefined) {
+    if (id === undefined) {
       return res
         .status(400)
         .json({
@@ -139,10 +143,69 @@ export async function deleteGoldenThoughtHandler(req: Request, res: Response) {
   }
 }
 
+export async function setGoldenThoughtDone(req: Request, res: Response) {
+  try {
+    const id = req.query.id;
+
+    if (id === undefined) {
+      return res
+        .status(400)
+        .json({
+          message: "query param 'id' is required",
+          code: 400,
+        })
+        .send();
+    }
+
+    let goldenThought = await getGoldenThoughtById(id.toString());
+
+    if (goldenThought === null) {
+      return res
+        .status(200)
+        .json({
+          message: `No golden thought with id: ${id.toString()}`,
+          code: 200,
+        })
+        .send();
+    }
+
+    if (goldenThought.isDone === true) {
+      return res
+        .status(200)
+        .json({
+          message: `Golden thought with id: ${id.toString()} is already done.`,
+          code: 200,
+        })
+        .send();
+    }
+
+    goldenThought.isDone = true;
+    const updated = await updateGoldenThought(goldenThought);
+
+    return res
+      .status(200)
+      .json(mapGoldenThoughtToGoldenThoughtDto(updated))
+      .send();
+  } catch (e) {
+    return res
+      .status(500)
+      .json({
+        message: "Server error",
+        code: 500,
+      })
+      .send();
+  }
+}
+
 const mapGoldenThoughtToGoldenThoughtDto = (
   goldeThought: GoldenThought
 ): GoldeThoughtDto => {
   const user =
     goldeThought.user === null ? "Anonymous" : goldeThought.user.name;
-  return { id: goldeThought.id, value: goldeThought.value, user: user };
+  return {
+    id: goldeThought.id,
+    value: goldeThought.value,
+    user: user,
+    isDone: goldeThought.isDone,
+  };
 };
