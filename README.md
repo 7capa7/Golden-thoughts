@@ -1,5 +1,5 @@
 # 7capa7 Rest Api with Node + Typescript
-* Application through which we can collect golden thoughts from employees in our company. App allows users to create golden thoughts anonymously or by revealing their name. User can search for all golden thoughts or only those that have not been done yet. Admins can change the status of golden thoughts to 'done' and they can also delete them.
+* Application through which we can collect golden thoughts from employees in your company. App allows users to create golden thoughts anonymously or by revealing their name. User can search for all golden thoughts or only those that have not been done yet. Admins can change the status of golden thoughts to 'done' and they can also delete them.
 
 ## Requirements
 * Nodejs, Npm, Docker
