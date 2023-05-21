@@ -32,7 +32,7 @@ export async function createGoldenThoughtHandler(
     return res
       .status(500)
       .json({
-        message: "Server error",
+        message: "Server error ",
         code: 500,
       })
       .send();
