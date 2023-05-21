@@ -6,5 +6,5 @@ export default {
     db_username: process.env.DB_USERNAME,
     db_password: process.env.DB_PASSWORD,
     db_name: process.env.DB_NAME,
-    signingKey: "179u2b971b20zn189psg12sfg179sfg1pb1",
+    signingKey: process.env.SIGNING_SECRET,
 }
