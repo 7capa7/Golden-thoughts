@@ -46,7 +46,9 @@ export async function getGoldenThoughtsHandler(req: Request, res: Response) {
     var goldenThoughts;
     if (unDoneOnly === null || unDoneOnly === "false") {
       goldenThoughts = await getAllGoldenThoughts();
-    } else goldenThoughts = await getUnDoneGoldenThoughts();
+    } else if (unDoneOnly === "true")
+      goldenThoughts = await getUnDoneGoldenThoughts();
+    else goldenThoughts = await getAllGoldenThoughts();
 
     const goldenThoughtsDto: GoldeThoughtDto[] = goldenThoughts.map((e) =>
       mapGoldenThoughtToGoldenThoughtDto(e)
