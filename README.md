@@ -12,6 +12,7 @@
 * To run application: npm run dev
 * Application by default starts on localhost : 3000
 * At the start of the app will be created test users: "user@gmail.pl", "admin@gmail.pl" with password "password"
+* To run tests: npm run test
 
 ## Main Technologies
 * TypeScript
@@ -19,5 +20,6 @@
 * TypeORM
 * Postgres
 * Jsonwebtoken
+* Jest, Supertest [testing lib]
 
 ![postman](postman.png)
