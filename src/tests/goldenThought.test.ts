@@ -8,13 +8,14 @@ import * as goldenThoughtService from "../service/goldeThought.service";
 import Role from "../utils/Role";
 import { GoldenThought } from "../entity/GoldenThought";
 import * as userService from "../service/user.service";
+import * as jwtService from "../utils/jwt";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(goldeThoughtRouter);
 
 const jwtToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZkODA4MWMyLWViM2YtNGQ4Zi04YzI2LWQzNzkwNGM1ZDUyZiIsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2ODc0MDIsImV4cCI6MTY4NDY5NDYwMn0.iUWtewoVyaP9GrhLnSK_4D9PQ-f_dcn_-wV0APGvgzg";
+  "example-token-19237g127391bp-1203u913b7912b31";
 
 const getUser = async (): Promise<User> => {
   const user = new User();
@@ -45,6 +46,15 @@ const mockFindUserById = (user: User) => {
   );
 };
 
+const mockDecodeJwt = () => {
+  return (
+    jest
+    .spyOn(jwtService, "verifyJwt")
+    //@ts-ignore
+    .mockReturnValueOnce({id:"id"})
+  );
+}
+
 describe("golden thought", () => {
   describe("create golden thought", () => {
     describe("valid golden thought data and anonymous = false", () => {
@@ -58,6 +68,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce(goldenthought);
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .post("/api/auth/golden-thought")
@@ -84,6 +95,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ ...goldenthought, user: null });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .post("/api/auth/golden-thought")
@@ -113,6 +125,7 @@ describe("golden thought", () => {
           );
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .get("/api/auth/golden-thoughts")
@@ -137,6 +150,7 @@ describe("golden thought", () => {
           );
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .get("/api/auth/golden-thoughts")
@@ -161,6 +175,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce(goldenthought);
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .get("/api/auth/golden-thought")
@@ -185,6 +200,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce(null);
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .get("/api/auth/golden-thought")
@@ -211,6 +227,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce(null);
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .get("/api/auth/golden-thought")
@@ -235,6 +252,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ affected: 1 });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .delete("/api/auth/admin/golden-thought")
@@ -257,6 +275,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ affected: 0 });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .delete("/api/auth/admin/golden-thought")
@@ -281,6 +300,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce(null);
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .delete("/api/auth/admin/golden-thought")
@@ -311,6 +331,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ ...goldenThought, isDone: true });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .patch("/api/auth/admin/done")
@@ -340,6 +361,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ ...goldenThought, isDone: true });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .patch("/api/auth/admin/done")
@@ -369,6 +391,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ ...goldenThought, isDone: true });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .patch("/api/auth/admin/done")
@@ -400,6 +423,7 @@ describe("golden thought", () => {
           .mockReturnValueOnce({ ...goldenThought, isDone: true });
 
         mockFindUserById(user);
+        mockDecodeJwt();
 
         const { statusCode, body } = await supertest(app)
           .patch("/api/auth/admin/done")

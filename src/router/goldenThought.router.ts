@@ -1,6 +1,6 @@
 import { Router } from "express";
 import validateResource from "../middleware/validateResource";
-import { GoldenThoughtSchema } from "../schema/goldenThought.schema";
+import { GoldenThoughtSchema } from "../schema/GoldenThought.schema";
 import deserializeUser from "../middleware/deserializeUser";
 import {
   createGoldenThoughtHandler,
