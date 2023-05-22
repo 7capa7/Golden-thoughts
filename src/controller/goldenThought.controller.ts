@@ -2,7 +2,7 @@ import e, { Request, Response } from "express";
 import {
   GoldeThoughtDto,
   GoldenThoughtInput,
-} from "../schema/goldenThought.schema";
+} from "../schema/GoldenThought.schema";
 import {
   createGoldenThought,
   deleteGoldenThoughtById,
